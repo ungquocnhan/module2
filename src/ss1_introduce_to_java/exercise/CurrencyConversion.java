@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class CurrencyConversion {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Enter money usd: ");
 
-        double usd = scanner.nextDouble();
+        double usd = input.nextDouble();
         double rate = 23535;
         double vnd = usd * rate;
 
