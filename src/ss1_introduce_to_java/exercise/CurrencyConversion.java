@@ -7,10 +7,10 @@ public class CurrencyConversion {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter money usd: ");
 
-        double usd = input.nextDouble();
+        double moneyUsd = input.nextDouble();
         double rate = 23535;
-        double vnd = usd * rate;
+        double moneyVnd = moneyUsd * rate;
 
-        System.out.printf("VND : %.2f",vnd);
+        System.out.printf("VND : %.2f",moneyVnd);
     }
 }
