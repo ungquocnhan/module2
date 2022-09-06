@@ -1,0 +1,35 @@
+Phương thức	        Mô tả
+nextInt()	      Đọc một giá trị kiểu int.
+nextFloat()	      Đọc một giá trị kiểu float.
+nextBoolean()	Đọc một giá trị kiểu Boolean.
+nextLine()	      Đọc một dòng văn bản.
+next()	      Đọc một từ.
+nextByte()	      Đọc một giá trị ở dạng byte.
+nextDouble()	Đọc một giá trị kiểu double.
+nextShort()	      Đọc một giá trị kiểu short.
+nextLong()	      Đọc một giá trị kiểu long.
+
+
+String length : Dùng để lấy độ dài của một chuỗi string.length()
+String toUperCase và toLowerCase : Dùng để chuyển hoá chữ thành chữ hoa và chữ thường
+String IndexOf : Dùng để trả về vị trí 1 ký tự trong chuỗi
+String Concatenation : Dùng để nối 2 chuỗi lại với nhau
+\n : dùng để xuống dòng
+\t : cách nhau một khoảng tab
+\b : cách nhau một khoảng backspace
+Dấu + : Khi ta sử dụng dấu + thì đối với kiểu int thì nó là cộng 2 số, còn đối với kiểu String thì sẽ là concatenation (nối chuỗi)
+
+Các bộ định dạng có sẵn trong Printf:
+
+%c: Ký tự
+%d: Số thập phân (số nguyên) (cơ số 10)
+%e: Dấu phẩy động theo cấp số nhân
+%f: Dấu phẩy động
+%i: Số nguyên (cơ sở 10)
+%o: Số bát phân (cơ sở 8)
+%s: Chuỗi
+%u: Số thập phân (số nguyên) không dấu
+%x: Số trong hệ thập lục phân (cơ sở 16)
+%t: Định dạng ngày / giờ
+%%: Dấu phần trăm
+\%: Dấu phần trăm
