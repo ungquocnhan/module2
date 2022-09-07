@@ -1,9 +1,9 @@
-package ss2_loop.exercise;
+package ss2_array_loop.exercise;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class RemoveElementFromArray {
+public class AddElementToArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int size;
@@ -21,24 +21,23 @@ public class RemoveElementFromArray {
         }
         System.out.println(Arrays.toString(array));
 
-        System.out.print("Enter number to remove: ");
+        System.out.print("Enter number need insert: ");
         int number = Integer.parseInt(scanner.nextLine());
 
-        boolean isExist = false;
-        int indexRemove = 1;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == number) {
-                indexRemove = i;
-                isExist = true;
-                break;
+        int indexInsert;
+        do {
+            System.out.print("Enter position index need insert in array: ");
+            indexInsert = Integer.parseInt(scanner.nextLine());
+            if (indexInsert <= -1 || indexInsert >= array.length - 1) {
+                System.out.println("Don't insert element in array");
             }
+        } while (indexInsert <= -1 || indexInsert >= array.length - 1);
+
+        for (int i = array.length - 1; i > indexInsert; i--) {
+            array[i] = array[i - 1];
         }
-        if (!isExist) {
-            System.out.println("Not found " + number + " in the array.");
-        }
-        for (int i = indexRemove; i < array.length - 1; i++) {
-            array[i] = array[i + 1];
-        }
+        array[indexInsert] = number;
+
         System.out.println(Arrays.toString(array));
     }
 }

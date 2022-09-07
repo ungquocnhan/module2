@@ -1,8 +1,8 @@
-package ss2_loop.exercise;
+package ss2_array_loop.exercise;
 
 import java.util.Scanner;
 
-public class MergeArray {
+public class ShowTypes {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice = -1;

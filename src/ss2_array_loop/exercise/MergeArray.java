@@ -1,9 +1,9 @@
-package ss2_loop.exercise;
+package ss2_array_loop.exercise;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ShowTypes {
+public class MergeArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

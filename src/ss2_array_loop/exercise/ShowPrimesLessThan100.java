@@ -1,4 +1,4 @@
-package ss2_loop.exercise;
+package ss2_array_loop.exercise;
 
 public class ShowPrimesLessThan100 {
     public static void main(String[] args) {

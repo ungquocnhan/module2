@@ -1,4 +1,4 @@
-package ss2_loop.exercise;
+package ss2_array_loop.exercise;
 
 
 public class ShowFirst20Primes {
