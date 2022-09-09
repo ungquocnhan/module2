@@ -41,11 +41,7 @@ public class SumNumbersInColumn {
     static int sumNumbers(int[][] array, int numberColumn) {
         int sum = 0;
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                if (j == numberColumn) {
-                    sum += array[i][j];
-                }
-            }
+            sum += array[i][numberColumn];
         }
         return sum;
     }
