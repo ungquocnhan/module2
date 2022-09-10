@@ -52,22 +52,18 @@ public class Fan {
     public Fan() {
     }
 
-    public void turnOn() {
-        on = true;
-    }
-
 
     public String toString() {
         if (on) {
             return "Fan : " + "speed is " + speed + ", radius is " + radius + ", color is " + color + ", fan is on.";
         } else {
-            return "Fan : " + "speed is " + speed + ", radius is " + radius + ", color is " + color + ", fan is off.";
+            return "Fan : " + "radius is " + radius + ", color is " + color + ", fan is off.";
         }
     }
 
     public static void main(String[] args) {
         Fan fan1 = new Fan();
-        fan1.turnOn();
+        fan1.setOn(true);
         fan1.setSpeed(fan1.FAST);
         fan1.setRadius(10);
         fan1.setColor("yellow");

@@ -5,7 +5,7 @@ import ss4_class_object_in_java.exercise.Fan;
 public class Main {
     public static void main(String[] args) {
         ss4_class_object_in_java.exercise.Fan fan1 = new ss4_class_object_in_java.exercise.Fan();
-        fan1.turnOn();
+        fan1.setOn(true);
         fan1.setSpeed(3);
         fan1.setRadius(10);
         fan1.setColor("yellow");

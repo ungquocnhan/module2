@@ -6,14 +6,11 @@ public class StopWatch {
     private long endTime;
 
 
-    public StopWatch(long startTime, long endTime) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
     public StopWatch() {
+        this.startTime = System.currentTimeMillis();
 
     }
+
 
     public long getStartTime() {
         return startTime;
@@ -31,9 +28,6 @@ public class StopWatch {
         this.endTime = endTime;
     }
 
-    public void startTime() {
-        this.startTime = System.currentTimeMillis();
-    }
 
     public long start() {
         return this.startTime = System.currentTimeMillis();
