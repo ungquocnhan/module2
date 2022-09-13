@@ -1,8 +1,8 @@
 package ss6_inheritance.exercise.class_point2d_class_point3d.point2d;
 
 public class Point2D {
-private double x = 0.0f;
-private double y = 0.0f;
+    private double x = 0.0f;
+    private double y = 0.0f;
 
     public Point2D(double x, double y) {
         this.x = x;
@@ -28,19 +28,18 @@ private double y = 0.0f;
         this.y = y;
     }
 
-    public void setXY(float x, float y){
+    public void setXY(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public double[] getXY(){
+    public double[] getXY() {
         return new double[]{this.x, this.y};
     }
 
     @Override
     public String toString() {
-        return "Point2D " +
-                "x = " + x +
-                ", y = " + y ;
+        return "Point2D "+ "\""+ String.format("(%.2f,%.2f)",x,y) + "\"";
     }
+
 }
