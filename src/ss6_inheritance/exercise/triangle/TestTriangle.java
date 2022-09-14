@@ -8,11 +8,11 @@ public class TestTriangle {
         Triangle triangle = new Triangle();
 
         System.out.print("Enter side1 : ");
-        double side1 = Integer.parseInt(scanner.nextLine());
+        double side1 = Double.parseDouble(scanner.nextLine());
         System.out.print("Enter side2 : ");
-        double side2 = Integer.parseInt(scanner.nextLine());
+        double side2 = Double.parseDouble(scanner.nextLine());
         System.out.print("Enter side3 : ");
-        double side3 = Integer.parseInt(scanner.nextLine());
+        double side3 = Double.parseDouble(scanner.nextLine());
         System.out.print("Enter color triangle : ");
         String color = scanner.nextLine();
         if (side1 > 0 && side2 > 0 && side3 > 0) {

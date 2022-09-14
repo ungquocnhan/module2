@@ -51,6 +51,6 @@ public class Triangle extends Shape {
 
     @Override
     public String toString() {
-        return "Triangle " + "color " + super.getColor() +", area " + getArea() + ", perimeter " + getPerimeter();
+        return "Triangle " + "color " + super.getColor() +String.format("Area = %.2f, Perimeter = %.2f",getArea(),getPerimeter());
     }
 }
