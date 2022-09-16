@@ -30,7 +30,7 @@ public class MyList<E> {
     }
 
     public void add(int index, E element) {
-        if (index > elements.length) {
+        if (index > elements.length || index < 0) {
             throw new IllegalArgumentException("index: " + index);
         } else if (elements.length == size) {
             this.ensureCapacity(5);
@@ -87,7 +87,7 @@ public class MyList<E> {
     }
 
     public boolean add(E e) {
-        if(elements.length == size){
+        if (elements.length == size) {
             this.ensureCapacity(5);
         }
         elements[size] = e;
