@@ -44,7 +44,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public void displayStudent() {
-        for(Student student:studentList){
+        for (Student student : studentList) {
             System.out.println(student);
         }
     }

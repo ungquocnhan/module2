@@ -34,7 +34,7 @@ public class Student extends Person {
         return "Student{" +
                 "className='" + nameClass + '\'' +
                 ", point=" + point +
-                super.toString()+
+                super.toString() +
                 '}';
     }
 

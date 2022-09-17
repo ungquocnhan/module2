@@ -21,8 +21,9 @@ public class Teacher extends Person {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "technique='" + technique + '\'' +super.toString()+
+        return "Teacher{" + "technique='"
+                + technique + '\''
+                + super.toString() +
                 '}';
     }
 }

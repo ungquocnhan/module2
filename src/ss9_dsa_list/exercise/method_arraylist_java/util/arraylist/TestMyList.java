@@ -37,6 +37,7 @@ public class TestMyList {
         Student d = new Student(4, "Trúc");
         Student e = new Student(5, "My");
         Student f = new Student(6, "Ny");
+        Student g = new Student(7, "Nhan");
 
         MyList<Student> studentMyList = new MyList<>();
         MyList<Student> newStudentMyList = new MyList<>();
@@ -46,6 +47,7 @@ public class TestMyList {
         studentMyList.add(d);
         studentMyList.add(e);
         studentMyList.add(2, f);
+        studentMyList.add(-1, g);
 
         System.out.println(studentMyList.size());
         System.out.println("--------------------------------");

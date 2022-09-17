@@ -13,9 +13,9 @@ public class StudentController {
         while (true) {
             System.out.println("------------------------------------------------");
             System.out.println("Chương trình quản lý sinh viên");
-            System.out.println("1. Thêm mới giảng viên hoặc học sinh");
-            System.out.println("2. Xóa giảng viên hoặc học sinh");
-            System.out.println("3. Hiển thị danh sách giảng viên hoặc học sinh");
+            System.out.println("1. Thêm mới  sinh viên");
+            System.out.println("2. Xóa giảng sinh viên");
+            System.out.println("3. Hiển thị danh sách sinh viên");
             System.out.println("4. Thoát");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
