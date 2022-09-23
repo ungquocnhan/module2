@@ -1,7 +1,7 @@
-package ss12_search_algorithms.exercise.bai_tap_them_HaiTT.service.impl;
+package ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.service.impl;
 
-import ss12_search_algorithms.exercise.bai_tap_them_HaiTT.model.Student;
-import ss12_search_algorithms.exercise.bai_tap_them_HaiTT.service.IStudentService;
+import ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.model.Student;
+import ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.service.IStudentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +50,28 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void searchStudent() {
+    public void searchStudentName() {
         System.out.print("Mời bạn nhập tên học sinh cần tìm: ");
         String name = scanner.nextLine();
         boolean flagDelete = false;
         for (int i = 0; i < studentList.size(); i++) {
             if (studentList.get(i).getName().contains(name)) {
+                System.out.println(studentList.get(i).toString());
+                flagDelete = true;
+            }
+        }
+        if (!flagDelete) {
+            System.out.println("Không tìm thấy học sinh cần tìm.");
+        }
+    }
+
+    @Override
+    public void searchStudentId() {
+        System.out.print("Mời bạn nhập mã học sinh cần tìm: ");
+        String code = scanner.nextLine();
+        boolean flagDelete = false;
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getCode().equals(code)) {
                 System.out.println(studentList.get(i).toString());
                 flagDelete = true;
             }

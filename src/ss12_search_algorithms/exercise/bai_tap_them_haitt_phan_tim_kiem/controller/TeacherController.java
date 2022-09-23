@@ -1,7 +1,7 @@
-package ss12_search_algorithms.exercise.bai_tap_them_HaiTT.controller;
+package ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.controller;
 
-import ss12_search_algorithms.exercise.bai_tap_them_HaiTT.service.ITeacherService;
-import ss12_search_algorithms.exercise.bai_tap_them_HaiTT.service.impl.TeacherService;
+import ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.service.ITeacherService;
+import ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.service.impl.TeacherService;
 
 import java.util.Scanner;
 
@@ -16,7 +16,8 @@ public class TeacherController {
             System.out.println("1. Thêm mới giảng viên");
             System.out.println("2. Xóa giảng viên");
             System.out.println("3. Hiển thị danh sách giảng viên");
-            System.out.println("4. Tìm kiếm giảng viên");
+            System.out.println("4. Tìm kiếm giảng viên theo tên");
+            System.out.println("5. Tìm kiếm giảng viên theo id");
             System.out.println("5. Thoát");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -30,9 +31,12 @@ public class TeacherController {
                     iTeacherService.displayTeacher();
                     break;
                 case 4:
-                    iTeacherService.searchTeacher();
+                    iTeacherService.searchTeacherName();
                     break;
                 case 5:
+                    iTeacherService.searchTeacherId();
+                    break;
+                case 6:
                     System.exit(0);
             }
 

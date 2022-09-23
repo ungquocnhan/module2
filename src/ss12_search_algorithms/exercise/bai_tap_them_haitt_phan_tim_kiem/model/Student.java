@@ -1,4 +1,4 @@
-package ss12_search_algorithms.exercise.bai_tap_them_HaiTT.model;
+package ss12_search_algorithms.exercise.bai_tap_them_haitt_phan_tim_kiem.model;
 
 public class Student extends Person {
     private String nameClass;

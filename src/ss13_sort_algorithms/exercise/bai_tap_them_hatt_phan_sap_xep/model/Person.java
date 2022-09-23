@@ -1,4 +1,4 @@
-package ss12_search_algorithms.exercise.bai_tap_them_HaiTT.model;
+package ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.model;
 
 public abstract class Person {
     private String code;

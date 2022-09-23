@@ -1,4 +1,4 @@
-package ss12_search_algorithms.exercise.bai_tap_them_HaiTT.controller;
+package ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.controller;
 
 import java.util.Scanner;
 
