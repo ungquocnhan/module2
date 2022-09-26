@@ -31,10 +31,10 @@ public class VehicleController {
 
             switch (choice) {
                 case 1:
-                    AddController.menuAdd();
+                    VehicleController.menuAdd();
                     break;
                 case 2:
-                    DisplayController.menuDisplay();
+                    VehicleController.menuDisplay();
                     break;
                 case 3:
                     System.out.print("Nhập biển kiểm soát bạn muốn xóa : ");
@@ -52,6 +52,56 @@ public class VehicleController {
                     break;
                 case 5:
                     System.exit(0);
+            }
+        }
+    }
+
+    public static void menuAdd() {
+        while (true) {
+            System.out.println("Mời bạn chọn phương tiện giao thông muốn thêm vào");
+            System.out.println("1. Xe tải");
+            System.out.println("2. Xe ô tô");
+            System.out.println("3. Xe máy");
+            System.out.println("4. Quay về menu chính");
+
+            int choiceAdd = Integer.parseInt(scanner.nextLine());
+            switch (choiceAdd) {
+                case 1:
+                    iTruckService.addTruck();
+                    break;
+                case 2:
+                    iCarService.addCar();
+                    break;
+                case 3:
+                    iMotorcycleService.addMotorcycle();
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+
+    public static void menuDisplay() {
+        while (true) {
+            System.out.println("Mời bạn chọn loại phương tiện giao thông muốn hiển thị");
+            System.out.println("1. Xe tải");
+            System.out.println("2. Xe ô tô");
+            System.out.println("3. Xe máy");
+            System.out.println("4. Quay về menu chính");
+
+            int choiceDisplay = Integer.parseInt(scanner.nextLine());
+            switch (choiceDisplay) {
+                case 1:
+                    iTruckService.displayTruck();
+                    break;
+                case 2:
+                    iCarService.displayCar();
+                    break;
+                case 3:
+                    iMotorcycleService.displayMotorcycle();
+                    break;
+                case 4:
+                    return;
             }
         }
     }

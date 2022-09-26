@@ -1,9 +1,9 @@
-package ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.controller;
+package ss14_exception_debug.exercise.bai_tap_them_haitt_phan_ngoai_le.controller;
 
-import ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.service.IStudentService;
-import ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.service.ITeacherService;
-import ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.service.impl.StudentService;
-import ss13_sort_algorithms.exercise.bai_tap_them_hatt_phan_sap_xep.service.impl.TeacherService;
+import ss14_exception_debug.exercise.bai_tap_them_haitt_phan_ngoai_le.service.IStudentService;
+import ss14_exception_debug.exercise.bai_tap_them_haitt_phan_ngoai_le.service.ITeacherService;
+import ss14_exception_debug.exercise.bai_tap_them_haitt_phan_ngoai_le.service.impl.StudentService;
+import ss14_exception_debug.exercise.bai_tap_them_haitt_phan_ngoai_le.service.impl.TeacherService;
 
 import java.util.Scanner;
 
@@ -14,31 +14,34 @@ public class ManageDataController {
 
 
     public static void menuManageData() {
-        System.out.println("------------------------------------------------");
-        System.out.println("Chương trình quản lý giảng viên và sinh viên");
-        System.out.println("1. Quản lý giảng viên");
-        System.out.println("2. Quản lý sinh viên");
-        System.out.println("3. Thoát");
+        while (true) {
+            System.out.println("------------------------------------------------");
+            System.out.println("Chương trình quản lý giảng viên và sinh viên");
+            System.out.println("1. Quản lý giảng viên");
+            System.out.println("2. Quản lý sinh viên");
+            System.out.println("3. Thoát");
 
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                ManageDataController.menuTeacher();
-                break;
-            case 2:
-                ManageDataController.menuStudent();
-                break;
-            case 3:
-                System.exit(0);
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    ManageDataController.menuTeacher();
+                    break;
+                case 2:
+                    ManageDataController.menuStudent();
+                    break;
+                case 3:
+                    System.exit(0);
+            }
         }
     }
+
 
     public static void menuStudent() {
         while (true) {
             System.out.println("------------------------------------------------");
             System.out.println("Chương trình quản lý sinh viên");
-            System.out.println("1. Thêm mới  sinh viên");
-            System.out.println("2. Xóa giảng sinh viên");
+            System.out.println("1. Thêm mới sinh viên");
+            System.out.println("2. Xóa sinh viên");
             System.out.println("3. Hiển thị danh sách sinh viên");
             System.out.println("4. Tìm kiếm sinh viên");
             System.out.println("5. Sắp xếp sinh viên");
