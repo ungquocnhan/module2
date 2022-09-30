@@ -68,7 +68,8 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void removeStudent() {
+    public void removeStudent() throws IOException {
+        studentList = getAllStudentFromFile();
         System.out.print("Mời bạn nhập mã học sinh cần xóa: ");
         String code = scanner.nextLine();
         boolean flagDelete = false;
@@ -87,6 +88,7 @@ public class StudentService implements IStudentService {
         if (!flagDelete) {
             System.out.println("Không tìm thấy đối tượng cần xóa.");
         }
+        writeFile(studentList);
     }
 
     @Override
@@ -98,7 +100,8 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void searchStudentName() {
+    public void searchStudentName() throws IOException {
+        studentList = getAllStudentFromFile();
         System.out.print("Mời bạn nhập tên học sinh cần tìm: ");
         String name = scanner.nextLine();
         boolean flagDelete = false;
@@ -114,7 +117,8 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void searchStudentId() {
+    public void searchStudentId() throws IOException {
+        studentList = getAllStudentFromFile();
         System.out.print("Mời bạn nhập mã học sinh cần tìm: ");
         String code = scanner.nextLine();
         boolean flagSearch = false;
@@ -131,6 +135,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public void sortStudent() throws IOException {
+        studentList = getAllStudentFromFile();
         for (int i = 1; i < studentList.size(); i++) {
             Student key = studentList.get(i);
             int j;

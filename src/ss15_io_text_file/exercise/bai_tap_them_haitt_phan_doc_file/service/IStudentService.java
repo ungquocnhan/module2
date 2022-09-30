@@ -6,13 +6,13 @@ import java.io.IOException;
 public interface IStudentService {
     void addStudent() throws IOException;
 
-    void removeStudent();
+    void removeStudent() throws IOException;
 
     void displayStudent() throws IOException;
 
-    void searchStudentName();
+    void searchStudentName() throws IOException;
 
-    void searchStudentId();
+    void searchStudentId() throws IOException;
 
     void sortStudent() throws IOException;
 }

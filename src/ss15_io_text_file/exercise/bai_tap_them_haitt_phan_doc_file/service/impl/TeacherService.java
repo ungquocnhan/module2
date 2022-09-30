@@ -70,7 +70,8 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void removeTeacher() {
+    public void removeTeacher() throws IOException {
+        teacherList = getAllTeacherFromFile();
         System.out.print("Mời bạn nhập mã giảng viên cần xóa: ");
         String code = scanner.nextLine();
         boolean flagDelete = false;
@@ -89,6 +90,7 @@ public class TeacherService implements ITeacherService {
         if (!flagDelete) {
             System.out.println("Không tìm thấy đối tượng cần xóa.");
         }
+        writeFile(teacherList);
     }
 
     @Override
@@ -100,7 +102,8 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void searchTeacherName() {
+    public void searchTeacherName() throws IOException {
+        teacherList = getAllTeacherFromFile();
         System.out.print("Mời bạn nhập tên giảng viên cần tìm: ");
         String name = scanner.nextLine();
         boolean flagDelete = false;
@@ -116,7 +119,8 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
-    public void searchTeacherId() {
+    public void searchTeacherId() throws IOException {
+        teacherList = getAllTeacherFromFile();
         System.out.print("Mời bạn nhập mã giảng viên cần tìm: ");
         String code = scanner.nextLine();
         boolean flagDelete = false;
@@ -133,6 +137,7 @@ public class TeacherService implements ITeacherService {
 
     @Override
     public void sortTeacher() throws IOException {
+        teacherList = getAllTeacherFromFile();
         for (int i = 1; i < teacherList.size(); i++) {
             Teacher key = teacherList.get(i);
             int j;
