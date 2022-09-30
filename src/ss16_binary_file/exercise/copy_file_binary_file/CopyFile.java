@@ -54,13 +54,11 @@ public class CopyFile {
                 count += length;
             }
             System.out.println("Số byte trong tệp : " + count);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File source không tồn tại");
         } catch (FileFoundException e) {
             System.out.println("File target đã tồn tại");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
