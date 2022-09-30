@@ -104,7 +104,7 @@ public class ManageDataController {
         }
     }
 
-    public static void menuSearchStudent() {
+    public static void menuSearchStudent() throws IOException {
         while (true) {
             System.out.println("------------------------------------");
             System.out.println("Tìm kiếm sinh viên");
@@ -126,7 +126,7 @@ public class ManageDataController {
         }
     }
 
-    public static void menuSearchTeacher() {
+    public static void menuSearchTeacher() throws IOException {
         while (true) {
             System.out.println("------------------------------------");
             System.out.println("Tìm kiếm giảng viên");
