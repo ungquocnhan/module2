@@ -1,6 +1,4 @@
-package model;
-
-import demo_io_text_file.src.model.Person;
+package demo_io_text_file.src.model;
 
 public class Student extends Person {
     private String nameClass;
@@ -20,6 +18,7 @@ public class Student extends Person {
 
     public Student() {
     }
+
 
     public String getNameClass() {
         return nameClass;

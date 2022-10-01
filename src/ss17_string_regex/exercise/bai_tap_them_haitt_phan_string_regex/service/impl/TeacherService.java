@@ -1,11 +1,12 @@
-package ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.service.impl;
+package ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.service.impl;
 
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.model.Teacher;
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.service.ITeacherService;
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.utils.CheckCodeException;
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.utils.CheckGenderException;
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.utils.CheckNameException;
-import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.utils.CheckTechniqueException;
+
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.model.Teacher;
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.service.ITeacherService;
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.utils.exception.CheckCodeException;
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.utils.exception.CheckGenderException;
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.utils.exception.CheckNameException;
+import ss17_string_regex.exercise.bai_tap_them_haitt_phan_string_regex.utils.exception.CheckTechniqueException;
 
 import java.io.*;
 import java.time.DateTimeException;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TeacherService implements ITeacherService {
-    public static final String TEACHER_LIST = "F:/CODEGYM/module_2/src/ss15_io_text_file/exercise/bai_tap_them_haitt_phan_doc_file/data/teacher.csv";
+    public static final String TEACHER = "F:/CODEGYM/module_2/src/ss17_string_regex/exercise/bai_tap_them_haitt_phan_string_regex/data/teacher.csv";
     private static Scanner scanner = new Scanner(System.in);
     private static List<Teacher> teacherList = new ArrayList<>();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -33,20 +34,24 @@ public class TeacherService implements ITeacherService {
     }
 
     private void writeFile(List<Teacher> teacherList) throws IOException {
-        File file = new File(TEACHER_LIST);
+        File file = new File(TEACHER);
 
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         for (Teacher teacher : teacherList) {
-            bufferedWriter.write(teacher.getInfo());
+            bufferedWriter.write(getInfo(teacher));
             bufferedWriter.newLine();
         }
         bufferedWriter.close();
     }
 
+    public String getInfo(Teacher teacher) {
+        return teacher.getCode() + "," + teacher.getName() + "," + teacher.getDayOfBirth() + "," + teacher.getGender() + "," + teacher.getTechnique();
+    }
+
     private List<Teacher> getAllTeacherFromFile() throws IOException {
-        File file = new File(TEACHER_LIST);
+        File file = new File(TEACHER);
 
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -59,7 +64,7 @@ public class TeacherService implements ITeacherService {
             teacher = new Teacher();
             teacher.setCode(info[0]);
             teacher.setName(info[1]);
-            teacher.setDayOfBirth(LocalDate.parse(info[2]),formatter);
+            teacher.setDayOfBirth(LocalDate.parse(info[2]), formatter);
             teacher.setGender(info[3]);
             teacher.setTechnique(info[4]);
             teacherList.add(teacher);
@@ -170,7 +175,7 @@ public class TeacherService implements ITeacherService {
             try {
                 System.out.print("Mời bạn nhập chuyên môn giảng viên: ");
                 technique = scanner.nextLine();
-                if (!technique.matches("^[a-zA-Z0-9'-'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝỶỸửữựỵ ỷỹ]*$")) {
+                if (!technique.matches("^[IT][c-u]{4,9}\\s[M][d-u]{5}[1-6]$")) {
                     throw new CheckTechniqueException("Bạn nhập không đúng định dạng");
                 }
                 break;
@@ -187,7 +192,7 @@ public class TeacherService implements ITeacherService {
             try {
                 System.out.print("Mời bạn nhập giới tính giảng viên: ");
                 gender = scanner.nextLine();
-                if (!gender.matches("^[a-zA-Z\\sữô]*$")) {
+                if (!gender.matches("^[NKamhngữô]+$")) {
                     throw new CheckGenderException("Bạn nhập không đúng định dạng");
                 }
                 break;
@@ -218,8 +223,13 @@ public class TeacherService implements ITeacherService {
             try {
                 System.out.print("Mời bạn nhập tên giảng viên: ");
                 name = scanner.nextLine();
-                if (!name.matches("^[A-Z][a-zA-Z'-'\\sáàảãạăâắằấầặẵẫậéèẻ ẽẹếềểễệóòỏõọôốồổỗộ ơớờởỡợíìỉĩịđùúủũụưứ� �ửữựÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠ ƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼ� ��ỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞ ỠỢỤỨỪỬỮỰỲỴÝỶỸửữựỵ ỷỹ]{3,25}")) {
-                    throw new CheckNameException("Bạn nhập không đúng định dạng");
+                String[] str = name.trim().split(" ");
+                String regex;
+                for (int i = 0; i < str.length; i++) {
+                    regex = "^[A-ZÂÊÔƯĐ][a-záàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ]{1,5}$";
+                    if (!str[i].matches(regex)) {
+                        throw new CheckNameException("Bạn nhập không đúng định dạng");
+                    }
                 }
                 break;
             } catch (CheckNameException e) {
@@ -235,7 +245,7 @@ public class TeacherService implements ITeacherService {
             try {
                 System.out.print("Mời bạn nhập mã giảng viên : ");
                 code = scanner.nextLine();
-                if (!code.matches("[a-zA-Z0-9]{4,6}")) {
+                if (!code.matches("^CG[0-9]{2}$")) {
                     throw new CheckCodeException("Bạn nhập không đúng định dạng");
                 }
                 break;
