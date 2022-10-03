@@ -1,7 +1,7 @@
-package controller;
+package c0722g1_mvc.src.controller;
 
-import service.IStudentService;
-import service.impl.StudentService;
+import c0722g1_mvc.src.service.IStudentService;
+import c0722g1_mvc.src.service.impl.StudentService;
 
 import java.util.Scanner;
 

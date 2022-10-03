@@ -43,7 +43,7 @@ public class StudentService implements IStudentService {
     }
 
     private String getInfo(Student student) {
-        return student.getCode() + "," + student.getName() + "," + student.getDayOfBirth() + "," + student.getGender() + "," + student.getNameClass() + "," + student.getPoint();
+        return student.getCode() + "," + student.getName() + "," + student.getDayOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + student.getGender() + "," + student.getNameClass() + "," + student.getPoint();
     }
 
     private List<Student> getAllStudentFromFile() throws IOException {

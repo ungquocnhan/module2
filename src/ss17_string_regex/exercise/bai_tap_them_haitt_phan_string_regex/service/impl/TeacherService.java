@@ -47,7 +47,7 @@ public class TeacherService implements ITeacherService {
     }
 
     public String getInfo(Teacher teacher) {
-        return teacher.getCode() + "," + teacher.getName() + "," + teacher.getDayOfBirth() + "," + teacher.getGender() + "," + teacher.getTechnique();
+        return teacher.getCode() + "," + teacher.getName() + "," + teacher.getDayOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + teacher.getGender() + "," + teacher.getTechnique();
     }
 
     private List<Teacher> getAllTeacherFromFile() throws IOException {

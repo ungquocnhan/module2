@@ -1,4 +1,4 @@
-package service;
+package c0722g1_mvc.src.service;
 
 public interface IStudentService {
     void addStudent();

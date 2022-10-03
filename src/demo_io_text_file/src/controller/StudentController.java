@@ -1,7 +1,7 @@
 package demo_io_text_file.src.controller;
 
-import service.IStudentService;
-import service.impl.StudentService;
+import demo_io_text_file.src.service.IStudentService;
+import demo_io_text_file.src.service.impl.StudentService;
 
 import java.util.Scanner;
 

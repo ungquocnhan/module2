@@ -1,7 +1,8 @@
-package service.impl;
+package c0722g1_mvc.src.service.impl;
 
-import model.Student;
-import service.IStudentService;
+
+import c0722g1_mvc.src.model.Student;
+import c0722g1_mvc.src.service.IStudentService;
 
 import java.util.ArrayList;
 import java.util.List;

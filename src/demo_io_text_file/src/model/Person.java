@@ -40,10 +40,13 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                '}';
+        if (getGender()) {
+            return "Person{" + "code='" + code + '\'' + ", name='" + name + '\'' + ", gender=" + "Nam" + '}';
+        } else if (!getGender()) {
+            return "Person{" + "code='" + code + '\'' + ", name='" + name + '\'' + ", gender=" + "Nữ" + '}';
+        } else if (getGender() == null) {
+            return "Person{" + "code='" + code + '\'' + ", name='" + name + '\'' + ", gender=" + "LGBT" + '}';
+        }
+        return toString();
     }
 }

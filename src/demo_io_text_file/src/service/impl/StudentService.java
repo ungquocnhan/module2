@@ -1,7 +1,8 @@
 package demo_io_text_file.src.service.impl;
 
-import model.Student;
-import service.IStudentService;
+
+import demo_io_text_file.src.model.Student;
+import demo_io_text_file.src.service.IStudentService;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentService implements IStudentService {
+    public static final String STUDENT_CSV = "F:\\CODEGYM\\module_2\\src\\demo_io_text_file\\src\\data\\student.csv";
     private static Scanner scanner = new Scanner(System.in);
   private static List<Student> studentList = new ArrayList<>();
     @Override
@@ -80,7 +82,7 @@ public class StudentService implements IStudentService {
         List<Student> studentList = new ArrayList<>();
         BufferedReader bufferedReader = null;
         try {
-            file = new FileReader("src/data/student.csv");
+            file = new FileReader(STUDENT_CSV);
             bufferedReader = new BufferedReader(file);
             String line;
             String properties[];
@@ -105,7 +107,7 @@ public class StudentService implements IStudentService {
     private void writeFileStudent(List<Student> students) {
         BufferedWriter bufferedWriter =null;
         try {
-            FileWriter fileWriter = new FileWriter("src/data/student.csv");
+            FileWriter fileWriter = new FileWriter(STUDENT_CSV);
             bufferedWriter = new BufferedWriter(fileWriter);
             for(Student student: students) {
                 bufferedWriter.write(getInfo(student));

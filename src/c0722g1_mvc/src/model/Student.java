@@ -1,4 +1,4 @@
-package model;
+package c0722g1_mvc.src.model;
 
 import demo_io_text_file.src.model.Person;
 
