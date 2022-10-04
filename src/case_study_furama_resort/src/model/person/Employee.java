@@ -2,7 +2,7 @@ package case_study_furama_resort.src.model.person;
 
 import java.time.LocalDate;
 
-public class Employee extends Person{
+public class Employee extends Person {
     private String level;
     private String position;
     private Double salary;
@@ -10,7 +10,7 @@ public class Employee extends Person{
     public Employee() {
     }
 
-    public Employee(String id, String name, LocalDate dayOfBirth, Boolean gender, String numberIdentityCard, String numberPhone, String email, String level, String position, Double salary) {
+    public Employee(String id, String name, LocalDate dayOfBirth, String gender, String numberIdentityCard, String numberPhone, String email, String level, String position, Double salary) {
         super(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email);
         this.level = level;
         this.position = position;
@@ -46,6 +46,6 @@ public class Employee extends Person{
         return "Employee: " +
                 "level='" + level + '\'' +
                 ", position='" + position + '\'' +
-                ", salary=" + salary + super.toString();
+                ", salary= " + salary + "\t" + super.toString();
     }
 }

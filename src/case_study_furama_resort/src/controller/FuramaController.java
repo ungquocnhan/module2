@@ -26,7 +26,13 @@ public class FuramaController {
             System.out.println("5. Promotion Management");
             System.out.println("6. Exit");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try{
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
+
             switch (choice) {
                 case 1:
                     FuramaController.menuEmployeeManagement();
@@ -46,7 +52,7 @@ public class FuramaController {
                 case 6:
                     System.exit(0);
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Mời bạn chọn lại 1 - 6");
                     break;
             }
         }
@@ -61,7 +67,12 @@ public class FuramaController {
             System.out.println("3. Edit employee");
             System.out.println("4. Return main menu");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     employeeService.displayListEmployees();
@@ -75,7 +86,7 @@ public class FuramaController {
                 case 4:
                    return;
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Mời bạn chọn lại 1 - 4");
                     break;
             }
         }
@@ -89,7 +100,12 @@ public class FuramaController {
             System.out.println("3. Edit customer");
             System.out.println("4. Return main menu");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     customerService.displayListCustomers();
@@ -117,7 +133,12 @@ public class FuramaController {
             System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     facilityService.displayListFacility();
@@ -147,7 +168,12 @@ public class FuramaController {
             System.out.println("5. Edit contract");
             System.out.println("6. Return main menu");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     bookingService.addNewBooking();
@@ -180,7 +206,12 @@ public class FuramaController {
             System.out.println("2. Display list customers get voucher");
             System.out.println("3. Return main menu");
             System.out.print("Xin mời bạn chọn : ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     promotionManagementService.displayListCustomersUseService();

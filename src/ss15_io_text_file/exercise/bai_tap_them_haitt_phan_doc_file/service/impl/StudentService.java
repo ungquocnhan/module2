@@ -5,7 +5,6 @@ import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.service.IStud
 import ss15_io_text_file.exercise.bai_tap_them_haitt_phan_doc_file.utils.*;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +46,7 @@ public class StudentService implements IStudentService {
 
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
+        bufferedReader.close();
         String line;
         List<Student> studentList = new ArrayList<>();
         String[] info;

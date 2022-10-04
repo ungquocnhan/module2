@@ -8,16 +8,18 @@ public class Facility {
     private Double rentalCosts;
     private Integer maximumPeople;
     private LocalDateTime rentalType;
+    private String idService;
 
     public Facility() {
     }
 
-    public Facility(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, LocalDateTime rentalType) {
+    public Facility(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, LocalDateTime rentalType, String idService) {
         this.nameService = nameService;
         this.areaUsable = areaUsable;
         this.rentalCosts = rentalCosts;
         this.maximumPeople = maximumPeople;
         this.rentalType = rentalType;
+        this.idService = idService;
     }
 
     public String getNameService() {
@@ -60,13 +62,23 @@ public class Facility {
         this.rentalType = rentalType;
     }
 
+    public String getIdService() {
+        return idService;
+    }
+
+    public void setIdService(String idService) {
+        this.idService = idService;
+    }
+
     @Override
     public String toString() {
-        return "Facility: " +
-                "nameService='" + nameService +
+        return "Facility{" +
+                "nameService='" + nameService + '\'' +
                 ", areaUsable=" + areaUsable +
                 ", rentalCosts=" + rentalCosts +
                 ", maximumPeople=" + maximumPeople +
-                ", rentalType=" + rentalType ;
+                ", rentalType=" + rentalType +
+                ", idService='" + idService + '\'' +
+                '}';
     }
 }

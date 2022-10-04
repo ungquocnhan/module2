@@ -1,12 +1,13 @@
 package case_study_furama_resort.src.model.person;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Person {
     private String id;
     private String name;
     private LocalDate dayOfBirth;
-    private Boolean gender;
+    private String gender;
     private String numberIdentityCard;
     private String numberPhone;
     private String email;
@@ -14,7 +15,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(String id, String name, LocalDate dayOfBirth, Boolean gender, String numberIdentityCard, String numberPhone, String email) {
+    public Person(String id, String name, LocalDate dayOfBirth, String gender, String numberIdentityCard, String numberPhone, String email) {
         this.id = id;
         this.name = name;
         this.dayOfBirth = dayOfBirth;
@@ -44,15 +45,15 @@ public class Person {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(LocalDate dayOfBirth) {
+    public void setDayOfBirth(LocalDate dayOfBirth, DateTimeFormatter formatter) {
         this.dayOfBirth = dayOfBirth;
     }
 
-    public Boolean getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
