@@ -39,8 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private Employee infoEmployee() {
 
-        String id = "FU-0" + (employeeList.size() + 1) + "E";
-        System.out.println("Id employee : " + id);
+        String id = getIdEmployee();
 
         String name = getNameEmployee();
 
@@ -62,6 +61,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = new Employee(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email, level, position, salary);
         return employee;
+    }
+
+    private String getIdEmployee() {
+        String id;
+        while (true){
+            try {
+                System.out.print("Id employee (FUE-000-1->6) : ");
+                id = scanner.nextLine();
+                CheckFormatException.checkId(id);
+                boolean flagId = false;
+                for (Employee employee : employeeList) {
+                    if (employee.getId().equals(id)) {
+                        flagId = true;
+                        break;
+                    }
+                }
+                if(flagId){
+                    System.out.println("Id duplicates, re-enter");
+                }else {
+                    break;
+                }
+            } catch (CheckFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 
     private double getSalaryEmployee() {
@@ -116,8 +141,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 numberIdentityCard = scanner.nextLine();
                 CheckFormatException.checkNumberIdentityCard(numberIdentityCard);
                 boolean flagCheck = false;
-                for (int i = 0; i < employeeList.size(); i++) {
-                    if(employeeList.get(i).getNumberIdentityCard().equals(numberIdentityCard)){
+                for (Employee employee : employeeList) {
+                    if (employee.getNumberIdentityCard().equals(numberIdentityCard)) {
                         flagCheck = true;
                         break;
                     }

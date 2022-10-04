@@ -3,6 +3,7 @@ package case_study_furama_resort.src.utils.read_write_file;
 import case_study_furama_resort.src.model.person.Employee;
 
 import java.io.*;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,8 +51,10 @@ public class ReadAndWriteFile {
                 employee.setSalary(Double.parseDouble(info[9]));
                 employeeList.add(employee);
             }
-        } catch (IOException | NullPointerException e) {
+        } catch (NullPointerException e) {
             employeeList = new ArrayList<>();
+        }catch (DateTimeException | IOException e){
+            System.out.println(e.getMessage());
         }
         try {
             if (bufferedReader != null) {

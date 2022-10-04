@@ -5,6 +5,13 @@ public class CheckFormatException extends Exception {
         super(message);
     }
 
+    public static void checkId(String id) throws CheckFormatException {
+        String regex = "FUE-[0-9]{3}-[1-6]";
+        if(!id.matches(regex)){
+            throw new CheckFormatException("Enter incorrect format");
+        }
+    }
+
     public static void checkName(String name) throws CheckFormatException {
         String[] strings = name.trim().split(" ");
         String regex = "^[A-ZÂÊÔƯĐ][a-záàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ]{1,5}$";
