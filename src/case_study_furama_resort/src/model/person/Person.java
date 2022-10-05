@@ -45,7 +45,7 @@ public class Person {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(LocalDate dayOfBirth, DateTimeFormatter formatter) {
+    public void setDayOfBirth(LocalDate dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 
@@ -86,7 +86,7 @@ public class Person {
         return "Person: " +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", dayOfBirth=" + dayOfBirth +
+                ", dayOfBirth=" + dayOfBirth.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                 ", gender=" + gender +
                 ", numberIdentityCard='" + numberIdentityCard + '\'' +
                 ", numberPhone='" + numberPhone + '\'' +

@@ -3,7 +3,8 @@ package case_study_furama_resort.src.service.impl;
 import case_study_furama_resort.src.model.person.Employee;
 import case_study_furama_resort.src.service.EmployeeService;
 import case_study_furama_resort.src.utils.exception.CheckFormatException;
-import case_study_furama_resort.src.utils.read_write_file.ReadAndWriteFile;
+import case_study_furama_resort.src.utils.read_write_file.ReadFileUtils;
+import case_study_furama_resort.src.utils.read_write_file.WriteFileUtils;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -14,14 +15,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImpl implements EmployeeService {
-    private static final String EMPLOYEE = "src\\case_study_furama_resort\\src\\data\\employee.csv";
+    private static final String EMPLOYEE_CSV = "src\\case_study_furama_resort\\src\\data\\employee.csv";
     private static Scanner scanner = new Scanner(System.in);
     private static List<Employee> employeeList = new ArrayList<>();
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @Override
     public void displayListEmployees() {
-        ReadAndWriteFile.getAllEmployeeFromFile(EMPLOYEE);
+        employeeList = ReadFileUtils.getAllEmployeeFromFile(EMPLOYEE_CSV);
         for (Employee employee : employeeList) {
             System.out.println(employee);
         }
@@ -29,11 +30,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void addNewEmployee() {
-        ReadAndWriteFile.getAllEmployeeFromFile(EMPLOYEE);
+        employeeList = ReadFileUtils.getAllEmployeeFromFile(EMPLOYEE_CSV);
         Employee employee = this.infoEmployee();
-
         employeeList.add(employee);
-        ReadAndWriteFile.writeFileEmployee(employeeList,EMPLOYEE);
+        WriteFileUtils.writeFileEmployee(EMPLOYEE_CSV, employeeList);
         System.out.println("Enter success");
     }
 
@@ -65,9 +65,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private String getIdEmployee() {
         String id;
-        while (true){
+        while (true) {
             try {
-                System.out.print("Id employee (FUE-000-1->6) : ");
+                System.out.println("Enter id follow format FUE-xxx x : 3 number");
+                System.out.print("Id employee : ");
                 id = scanner.nextLine();
                 CheckFormatException.checkId(id);
                 boolean flagId = false;
@@ -77,9 +78,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                         break;
                     }
                 }
-                if(flagId){
+                if (flagId) {
                     System.out.println("Id duplicates, re-enter");
-                }else {
+                } else {
                     break;
                 }
             } catch (CheckFormatException e) {
@@ -91,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private double getSalaryEmployee() {
         double salary;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Enter salary : ");
                 salary = Double.parseDouble(scanner.nextLine());
@@ -105,7 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private String getEmailEmployee() {
         String email;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Enter email : ");
                 email = scanner.nextLine();
@@ -120,8 +121,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private String getNumberPhoneEmployee() {
         String numberPhone;
-        while (true){
+        while (true) {
             try {
+                System.out.println("Enter munber phone follow format +xx-xxxxxxxxxx  x: 2-6;0;9 number");
                 System.out.print("Enter number phone : ");
                 numberPhone = scanner.nextLine();
                 CheckFormatException.checkNumberPhone(numberPhone);
@@ -135,8 +137,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private String getNumberIdentityCardEmployee() {
         String numberIdentityCard;
-        while (true){
+        while (true) {
             try {
+                System.out.println("Enter number identity card follow format xxxxxxxxxxxx  x: 9-12 number");
                 System.out.print("Enter number identity card : ");
                 numberIdentityCard = scanner.nextLine();
                 CheckFormatException.checkNumberIdentityCard(numberIdentityCard);
@@ -147,9 +150,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                         break;
                     }
                 }
-                if(flagCheck){
+                if (flagCheck) {
                     System.out.println("Number Identity card duplicates, re-enter");
-                }else {
+                } else {
                     break;
                 }
             } catch (CheckFormatException e) {
@@ -162,18 +165,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     private LocalDate getDateEmployee() {
         LocalDate dayOfBirth;
         LocalDate now;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Enter day of birth employee : ");
                 dayOfBirth = LocalDate.parse(scanner.nextLine(), formatter);
                 now = LocalDate.now();
-                Period checkAge = Period.between(dayOfBirth,now);
-                if(checkAge.getYears() < 18){
-                    throw new DateTimeException("Not enough age to work");
+                Period checkAge = Period.between(dayOfBirth, now);
+                if (checkAge.getYears() < 18 || checkAge.getYears() > 70) {
+                    System.out.println("Not enough age or too old to work. re-enter");
+                } else {
+                    break;
                 }
-                break;
-            }catch (DateTimeException e){
-                System.out.println("Enter incorrect format of day or not enough age to work, re-enter");
+
+            } catch (DateTimeException e) {
+                System.out.println("Enter incorrect format of day, re-enter");
             }
         }
         return dayOfBirth;
@@ -181,7 +186,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private String getNameEmployee() {
         String name;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Enter name employee : ");
                 name = scanner.nextLine();
@@ -237,9 +242,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             System.out.println("3. University");
             System.out.println("4. After university");
             System.out.print("Enter choice level : ");
-            try{
+            try {
                 choiceLevel = Integer.parseInt(scanner.nextLine());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -278,7 +283,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             System.out.print("Enter position : ");
             try {
                 choicePosition = Integer.parseInt(scanner.nextLine());
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
             switch (choicePosition) {
@@ -310,8 +315,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void editEmployee() {
-        ReadAndWriteFile.getAllEmployeeFromFile(EMPLOYEE);
-        System.out.print("Enter id edit : ");
+        employeeList = ReadFileUtils.getAllEmployeeFromFile(EMPLOYEE_CSV);
+        System.out.print("Enter id employee edit : ");
         String id = scanner.nextLine();
         boolean flagDelete = false;
         String nameEdit;
@@ -323,7 +328,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         String levelEdit;
         String positionEdit;
         double salaryEdit;
-        int choice;
+        int choice = 0;
         for (int i = 0; i < employeeList.size(); i++) {
             if (employeeList.get(i).getId().equals(id)) {
                 LOOP:
@@ -339,10 +344,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                     System.out.println("8. Edit position");
                     System.out.println("9. Edit salary");
                     System.out.println("10. Return");
+                    try {
+                        System.out.print("Enter choice edit : ");
+                        choice = Integer.parseInt(scanner.nextLine());
 
-                    System.out.print("Enter choice edit : ");
-                    choice = Integer.parseInt(scanner.nextLine());
-
+                    } catch (NumberFormatException e) {
+                        System.out.println(e.getMessage());
+                    }
                     switch (choice) {
                         case 1:
                             nameEdit = getNameEmployee();
@@ -350,7 +358,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                             break;
                         case 2:
                             dayOfBirthEdit = getDateEmployee();
-                            employeeList.get(i).setDayOfBirth(dayOfBirthEdit, formatter);
+                            employeeList.get(i).setDayOfBirth(dayOfBirthEdit);
                             break;
                         case 3:
                             genderEdit = getGenderEmployee();
@@ -361,7 +369,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                             employeeList.get(i).setNumberIdentityCard(numberIdentityCardEdit);
                             break;
                         case 5:
-
                             numberPhoneEdit = getNumberPhoneEmployee();
                             employeeList.get(i).setNumberPhone(numberPhoneEdit);
                             break;
@@ -395,6 +402,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!flagDelete) {
             System.out.println("Don't have id to edit");
         }
-        ReadAndWriteFile.writeFileEmployee(employeeList,EMPLOYEE);
+        WriteFileUtils.writeFileEmployee(EMPLOYEE_CSV, employeeList);
+    }
+
+    public static String getInfo(Employee employee) {
+        return employee.getId() + ";" + employee.getName() + ";" + employee.getDayOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" + employee.getGender() + ";"
+                + employee.getNumberIdentityCard() + ";" + employee.getNumberPhone() + ";" + employee.getEmail() + ";" + employee.getLevel() + ";" + employee.getPosition() + ";" + employee.getSalary();
     }
 }

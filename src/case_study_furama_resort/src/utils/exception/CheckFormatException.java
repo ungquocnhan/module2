@@ -6,7 +6,7 @@ public class CheckFormatException extends Exception {
     }
 
     public static void checkId(String id) throws CheckFormatException {
-        String regex = "FUE-[0-9]{3}-[1-6]";
+        String regex = "FU[EC]-[0-9]{3}";
         if(!id.matches(regex)){
             throw new CheckFormatException("Enter incorrect format");
         }
@@ -23,14 +23,14 @@ public class CheckFormatException extends Exception {
     }
 
     public static void checkNumberIdentityCard(String numberIdentityCard) throws CheckFormatException {
-        String regex = "^[0-9]{12}$";
+        String regex = "^[0-9]{9,12}$";
         if (!numberIdentityCard.matches(regex)){
             throw new CheckFormatException("Enter incorrect format");
         }
     }
 
     public static void checkNumberPhone(String numberPhone) throws CheckFormatException {
-        String regex = "^[+][+\\d]{2,6}[-][0][\\d]{9}$";
+        String regex = "^[+?][+\\d]{2,6}[-][0][\\d]{9}$";
         if(!numberPhone.matches(regex)){
             throw new CheckFormatException("Enter incorrect format");
         }
@@ -43,5 +43,17 @@ public class CheckFormatException extends Exception {
         }
     }
 
-
+    public static void checkAddress(String address) throws CheckFormatException {
+        String[] strings1;
+        String regex = "^[A-ZÂÊÔƯĐ][a-záàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ]{1,5}$";
+        String[] strings = address.trim().split(",");
+        for (String string : strings) {
+            strings1 = string.trim().split(" ");
+            for (String s : strings1) {
+                if (!s.matches(regex)) {
+                    throw new CheckFormatException("Enter incorrect format");
+                }
+            }
+        }
+    }
 }

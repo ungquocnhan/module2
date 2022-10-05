@@ -1,7 +1,5 @@
 package case_study_furama_resort.src.model.facility;
 
-import java.time.LocalDateTime;
-
 public class House extends Facility {
     private String roomStandard;
     private Integer numberFloors;
@@ -9,7 +7,7 @@ public class House extends Facility {
     public House() {
     }
 
-    public House(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, LocalDateTime rentalType, String idService, String roomStandard, Integer numberFloors) {
+    public House(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, String rentalType, String idService, String roomStandard, Integer numberFloors) {
         super(nameService, areaUsable, rentalCosts, maximumPeople, rentalType, idService);
         this.roomStandard = roomStandard;
         this.numberFloors = numberFloors;

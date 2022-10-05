@@ -1,14 +1,12 @@
 package case_study_furama_resort.src.model.facility;
 
-import java.time.LocalDateTime;
-
 public class Room extends Facility {
     private String freeServiceIncluded;
 
     public Room() {
     }
 
-    public Room(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, LocalDateTime rentalType, String idService, String freeServiceIncluded) {
+    public Room(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, String rentalType, String idService, String freeServiceIncluded) {
         super(nameService, areaUsable, rentalCosts, maximumPeople, rentalType, idService);
         this.freeServiceIncluded = freeServiceIncluded;
     }

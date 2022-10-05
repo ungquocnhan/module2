@@ -1,19 +1,17 @@
 package case_study_furama_resort.src.model.facility;
 
-import java.time.LocalDateTime;
-
-public class Facility {
+public abstract class Facility {
     private String nameService;
     private Double areaUsable;
     private Double rentalCosts;
     private Integer maximumPeople;
-    private LocalDateTime rentalType;
+    private String rentalType;
     private String idService;
 
     public Facility() {
     }
 
-    public Facility(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, LocalDateTime rentalType, String idService) {
+    public Facility(String nameService, Double areaUsable, Double rentalCosts, Integer maximumPeople, String rentalType, String idService) {
         this.nameService = nameService;
         this.areaUsable = areaUsable;
         this.rentalCosts = rentalCosts;
@@ -54,11 +52,11 @@ public class Facility {
         this.maximumPeople = maximumPeople;
     }
 
-    public LocalDateTime getRentalType() {
+    public String getRentalType() {
         return rentalType;
     }
 
-    public void setRentalType(LocalDateTime rentalType) {
+    public void setRentalType(String rentalType) {
         this.rentalType = rentalType;
     }
 

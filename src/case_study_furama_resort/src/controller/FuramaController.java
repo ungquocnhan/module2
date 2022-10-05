@@ -25,7 +25,7 @@ public class FuramaController {
             System.out.println("4. Booking Management");
             System.out.println("5. Promotion Management");
             System.out.println("6. Exit");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try{
                 choice = Integer.parseInt(scanner.nextLine());
@@ -52,7 +52,7 @@ public class FuramaController {
                 case 6:
                     System.exit(0);
                 default:
-                    System.out.println("Mời bạn chọn lại 1 - 6");
+                    System.out.println("Please re-choice 1 - 6");
                     break;
             }
         }
@@ -66,7 +66,7 @@ public class FuramaController {
             System.out.println("2. Add new employee");
             System.out.println("3. Edit employee");
             System.out.println("4. Return main menu");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -86,7 +86,7 @@ public class FuramaController {
                 case 4:
                    return;
                 default:
-                    System.out.println("Mời bạn chọn lại 1 - 4");
+                    System.out.println("Please re-choice 1 - 4");
                     break;
             }
         }
@@ -99,7 +99,7 @@ public class FuramaController {
             System.out.println("2. Add new customer");
             System.out.println("3. Edit customer");
             System.out.println("4. Return main menu");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -119,7 +119,7 @@ public class FuramaController {
                 case 4:
                     return;
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Please re-choice 1 - 4 ");
                     break;
             }
         }
@@ -132,7 +132,7 @@ public class FuramaController {
             System.out.println("2. Add new facility");
             System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -144,7 +144,7 @@ public class FuramaController {
                     facilityService.displayListFacility();
                     break;
                 case 2:
-                    facilityService.addNewFacility();
+                    FuramaController.menuAddNewFacility();
                     break;
                 case 3:
                     facilityService.displayListFacilityMaintenance();
@@ -152,7 +152,37 @@ public class FuramaController {
                 case 4:
                    return;
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Please re-choice 1-4");
+                    break;
+            }
+        }
+    }
+
+    private static void menuAddNewFacility() {
+        int choice = 0;
+        while (true){
+            System.out.println("--------------Add new Facility--------------");
+            System.out.println("1. Add new villa");
+            System.out.println("2. Add new house");
+            System.out.println("3. Add new room");
+            System.out.println("4. Return menu");
+
+            System.out.println("Please choice");
+            choice = Integer.parseInt(scanner.nextLine());
+            switch (choice){
+                case 1:
+                    facilityService.addNewVilla();
+                    break;
+                case 2:
+                    facilityService.addNewHouse();
+                    break;
+                case 3:
+                    facilityService.addNewRoom();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Please re-choice 1-4");
                     break;
             }
         }
@@ -167,7 +197,7 @@ public class FuramaController {
             System.out.println("4. Display list contracts");
             System.out.println("5. Edit contract");
             System.out.println("6. Return main menu");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -193,7 +223,7 @@ public class FuramaController {
                 case 6:
                     return;
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Please re-choice 1-6");
                     break;
             }
         }
@@ -205,7 +235,7 @@ public class FuramaController {
             System.out.println("1. Display list customers use service");
             System.out.println("2. Display list customers get voucher");
             System.out.println("3. Return main menu");
-            System.out.print("Xin mời bạn chọn : ");
+            System.out.print("Please choice : ");
             int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -222,7 +252,7 @@ public class FuramaController {
                 case 3:
                     return;
                 default:
-                    System.out.println("Mời bạn chọn lại");
+                    System.out.println("Please re-choice 1-3");
                     break;
             }
         }
