@@ -70,13 +70,12 @@ public abstract class Facility {
 
     @Override
     public String toString() {
-        return "Facility{" +
-                "nameService='" + nameService + '\'' +
-                ", areaUsable=" + areaUsable +
-                ", rentalCosts=" + rentalCosts +
-                ", maximumPeople=" + maximumPeople +
-                ", rentalType=" + rentalType +
-                ", idService='" + idService + '\'' +
-                '}';
+        return "Facility : " +
+                "nameService= " + nameService + '\'' +
+                ", areaUsable= " + areaUsable +
+                ", rentalCosts= " + rentalCosts +
+                ", maximumPeople= " + maximumPeople +
+                ", rentalType= " + rentalType +
+                ", idService= " + idService + '\'';
     }
 }

@@ -17,6 +17,7 @@ public class FuramaController {
 
 
     public static void menuManageFuramaResort() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------FURAMA RESORT MANAGEMENT--------------");
             System.out.println("1. Employee Management");
@@ -26,7 +27,6 @@ public class FuramaController {
             System.out.println("5. Promotion Management");
             System.out.println("6. Exit");
             System.out.print("Please choice : ");
-            int choice = 0;
             try{
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
@@ -60,6 +60,7 @@ public class FuramaController {
     }
 
     private static void menuEmployeeManagement() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------Employee Management--------------");
             System.out.println("1. Display list employees");
@@ -67,7 +68,6 @@ public class FuramaController {
             System.out.println("3. Edit employee");
             System.out.println("4. Return main menu");
             System.out.print("Please choice : ");
-            int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
@@ -93,6 +93,7 @@ public class FuramaController {
     }
 
     private static void menuCustomerManagement() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------Customer Management--------------");
             System.out.println("1. Display list customers");
@@ -100,7 +101,6 @@ public class FuramaController {
             System.out.println("3. Edit customer");
             System.out.println("4. Return main menu");
             System.out.print("Please choice : ");
-            int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
@@ -126,6 +126,7 @@ public class FuramaController {
     }
 
     private static void menuFacilityManagement() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------Facility Management--------------");
             System.out.println("1. Display list facility");
@@ -133,7 +134,6 @@ public class FuramaController {
             System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu");
             System.out.print("Please choice : ");
-            int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
@@ -166,9 +166,12 @@ public class FuramaController {
             System.out.println("2. Add new house");
             System.out.println("3. Add new room");
             System.out.println("4. Return menu");
-
-            System.out.println("Please choice");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                System.out.print("Please choice : ");
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
             switch (choice){
                 case 1:
                     facilityService.addNewVilla();
@@ -189,6 +192,7 @@ public class FuramaController {
     }
 
     private static void menuBookingManagement() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------Booking Management--------------");
             System.out.println("1. Add new booking");
@@ -198,7 +202,6 @@ public class FuramaController {
             System.out.println("5. Edit contract");
             System.out.println("6. Return main menu");
             System.out.print("Please choice : ");
-            int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
@@ -230,13 +233,13 @@ public class FuramaController {
     }
 
     private static void menuPromotionManagement() {
+        int choice = 0;
         while (true) {
             System.out.println("--------------Promotion Management--------------");
             System.out.println("1. Display list customers use service");
             System.out.println("2. Display list customers get voucher");
             System.out.println("3. Return main menu");
             System.out.print("Please choice : ");
-            int choice = 0;
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){

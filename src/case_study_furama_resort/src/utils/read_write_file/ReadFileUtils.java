@@ -1,5 +1,9 @@
 package case_study_furama_resort.src.utils.read_write_file;
 
+import case_study_furama_resort.src.model.facility.Facility;
+import case_study_furama_resort.src.model.facility.House;
+import case_study_furama_resort.src.model.facility.Room;
+import case_study_furama_resort.src.model.facility.Villa;
 import case_study_furama_resort.src.model.person.Customer;
 import case_study_furama_resort.src.model.person.Employee;
 
@@ -7,7 +11,9 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReadFileUtils {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -73,7 +79,7 @@ public class ReadFileUtils {
     public static List<Customer> getAllCustomerFromFile(String filePath) {
         List<String> stringList = readFile(filePath);
         List<Customer> customerList = new ArrayList<>();
-        try{
+        try {
             String[] info;
             Customer customer;
             for (String s : stringList) {
@@ -94,5 +100,113 @@ public class ReadFileUtils {
             System.out.println(exception.getMessage());
         }
         return customerList;
+    }
+
+    public static Map<Facility, Integer> getAllFacilityFromFile(String filePath) {
+        List<String> stringList = readFile(filePath);
+        Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
+        try {
+            String[] info;
+            Villa villa;
+            House house;
+            Room room;
+            for (String s : stringList) {
+                info = s.split(",");
+                if (info.length == 10) {
+                    villa = new Villa();
+                    villa.setNameService(info[0]);
+                    villa.setAreaUsable(Double.parseDouble(info[1]));
+                    villa.setRentalCosts(Double.parseDouble(info[2]));
+                    villa.setMaximumPeople(Integer.parseInt(info[3]));
+                    villa.setRentalType(info[4]);
+                    villa.setIdService(info[5]);
+                    villa.setRoomStandard(info[6]);
+                    villa.setAreaSwimmingPool(Double.parseDouble(info[7]));
+                    villa.setNumberFloors(Integer.parseInt(info[8]));
+                    Integer value = Integer.parseInt(info[9]);
+                    facilityIntegerMap.put(villa, value);
+                } else if (info.length == 9) {
+                    house = new House();
+                    house.setNameService(info[0]);
+                    house.setAreaUsable(Double.parseDouble(info[1]));
+                    house.setRentalCosts(Double.parseDouble(info[2]));
+                    house.setMaximumPeople(Integer.parseInt(info[3]));
+                    house.setRentalType(info[4]);
+                    house.setIdService(info[5]);
+                    house.setRoomStandard(info[6]);
+                    house.setNumberFloors(Integer.parseInt(info[7]));
+                    Integer value = Integer.parseInt(info[8]);
+                    facilityIntegerMap.put(house, value);
+                } else if (info.length == 8) {
+                    room = new Room();
+                    room.setNameService(info[0]);
+                    room.setAreaUsable(Double.parseDouble(info[1]));
+                    room.setRentalCosts(Double.parseDouble(info[2]));
+                    room.setMaximumPeople(Integer.parseInt(info[3]));
+                    room.setRentalType(info[4]);
+                    room.setIdService(info[5]);
+                    room.setFreeServiceIncluded(info[6]);
+                    Integer value = Integer.parseInt(info[7]);
+                    facilityIntegerMap.put(room, value);
+                }
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return facilityIntegerMap;
+    }
+
+    public static Map<Facility, Integer> getAllFacilityMaintainFromFile(String filePath) {
+        List<String> stringList = readFile(filePath);
+        Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
+        try {
+            String[] info;
+            Villa villa;
+            House house;
+            Room room;
+            for (String s : stringList) {
+                info = s.split(",");
+                if (info.length == 10) {
+                    villa = new Villa();
+                    villa.setNameService(info[0]);
+                    villa.setAreaUsable(Double.parseDouble(info[1]));
+                    villa.setRentalCosts(Double.parseDouble(info[2]));
+                    villa.setMaximumPeople(Integer.parseInt(info[3]));
+                    villa.setRentalType(info[4]);
+                    villa.setIdService(info[5]);
+                    villa.setRoomStandard(info[6]);
+                    villa.setAreaSwimmingPool(Double.parseDouble(info[7]));
+                    villa.setNumberFloors(Integer.parseInt(info[8]));
+                    Integer value = Integer.parseInt(info[9]);
+                    facilityIntegerMap.put(villa, value);
+                } else if (info.length == 9) {
+                    house = new House();
+                    house.setNameService(info[0]);
+                    house.setAreaUsable(Double.parseDouble(info[1]));
+                    house.setRentalCosts(Double.parseDouble(info[2]));
+                    house.setMaximumPeople(Integer.parseInt(info[3]));
+                    house.setRentalType(info[4]);
+                    house.setIdService(info[5]);
+                    house.setRoomStandard(info[6]);
+                    house.setNumberFloors(Integer.parseInt(info[7]));
+                    Integer value = Integer.parseInt(info[8]);
+                    facilityIntegerMap.put(house, value);
+                } else if (info.length == 8) {
+                    room = new Room();
+                    room.setNameService(info[0]);
+                    room.setAreaUsable(Double.parseDouble(info[1]));
+                    room.setRentalCosts(Double.parseDouble(info[2]));
+                    room.setMaximumPeople(Integer.parseInt(info[3]));
+                    room.setRentalType(info[4]);
+                    room.setIdService(info[5]);
+                    room.setFreeServiceIncluded(info[6]);
+                    Integer value = Integer.parseInt(info[7]);
+                    facilityIntegerMap.put(room, value);
+                }
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return facilityIntegerMap;
     }
 }

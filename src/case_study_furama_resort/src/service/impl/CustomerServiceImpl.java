@@ -147,7 +147,7 @@ public class CustomerServiceImpl implements CustomerService {
         return numberPhone;
     }
 
-    private String getIdCustomer() {
+    static String getIdCustomer() {
         String id;
         while (true) {
             try {

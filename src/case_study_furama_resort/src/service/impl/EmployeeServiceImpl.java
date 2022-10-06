@@ -16,9 +16,9 @@ import java.util.Scanner;
 
 public class EmployeeServiceImpl implements EmployeeService {
     private static final String EMPLOYEE_CSV = "src\\case_study_furama_resort\\src\\data\\employee.csv";
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static List<Employee> employeeList = new ArrayList<>();
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @Override
     public void displayListEmployees() {
@@ -59,8 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         double salary = getSalaryEmployee();
 
-        Employee employee = new Employee(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email, level, position, salary);
-        return employee;
+        return new Employee(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email, level, position, salary);
     }
 
     private String getIdEmployee() {
@@ -172,7 +171,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 now = LocalDate.now();
                 Period checkAge = Period.between(dayOfBirth, now);
                 if (checkAge.getYears() < 18 || checkAge.getYears() > 70) {
-                    System.out.println("Not enough age or too old to work. re-enter");
+                    System.out.println("Not enough age or too old to work, re-enter");
                 } else {
                     break;
                 }
@@ -329,8 +328,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         String positionEdit;
         double salaryEdit;
         int choice = 0;
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getId().equals(id)) {
+        for (Employee employee : employeeList) {
+            if (employee.getId().equals(id)) {
                 LOOP:
                 while (true) {
                     System.out.println("Menu Edit");
@@ -354,39 +353,39 @@ public class EmployeeServiceImpl implements EmployeeService {
                     switch (choice) {
                         case 1:
                             nameEdit = getNameEmployee();
-                            employeeList.get(i).setName(nameEdit);
+                            employee.setName(nameEdit);
                             break;
                         case 2:
                             dayOfBirthEdit = getDateEmployee();
-                            employeeList.get(i).setDayOfBirth(dayOfBirthEdit);
+                            employee.setDayOfBirth(dayOfBirthEdit);
                             break;
                         case 3:
                             genderEdit = getGenderEmployee();
-                            employeeList.get(i).setGender(genderEdit);
+                            employee.setGender(genderEdit);
                             break;
                         case 4:
                             numberIdentityCardEdit = getNumberIdentityCardEmployee();
-                            employeeList.get(i).setNumberIdentityCard(numberIdentityCardEdit);
+                            employee.setNumberIdentityCard(numberIdentityCardEdit);
                             break;
                         case 5:
                             numberPhoneEdit = getNumberPhoneEmployee();
-                            employeeList.get(i).setNumberPhone(numberPhoneEdit);
+                            employee.setNumberPhone(numberPhoneEdit);
                             break;
                         case 6:
                             emailEdit = getEmailEmployee();
-                            employeeList.get(i).setEmail(emailEdit);
+                            employee.setEmail(emailEdit);
                             break;
                         case 7:
                             levelEdit = getLevelEmployee();
-                            employeeList.get(i).setLevel(levelEdit);
+                            employee.setLevel(levelEdit);
                             break;
                         case 8:
                             positionEdit = getPositionEmployee();
-                            employeeList.get(i).setPosition(positionEdit);
+                            employee.setPosition(positionEdit);
                             break;
                         case 9:
                             salaryEdit = getSalaryEmployee();
-                            employeeList.get(i).setSalary(salaryEdit);
+                            employee.setSalary(salaryEdit);
                             break;
                         case 10:
                             break LOOP;
