@@ -1,5 +1,6 @@
 package case_study_furama_resort.src.utils.read_write_file;
 
+import case_study_furama_resort.src.model.Booking;
 import case_study_furama_resort.src.model.facility.Facility;
 import case_study_furama_resort.src.model.person.Customer;
 import case_study_furama_resort.src.model.person.Employee;
@@ -14,6 +15,7 @@ import java.util.Set;
 import static case_study_furama_resort.src.service.impl.CustomerServiceImpl.getInfo;
 import static case_study_furama_resort.src.service.impl.EmployeeServiceImpl.getInfo;
 import static case_study_furama_resort.src.service.impl.FacilityServiceImpl.getInfo;
+import static case_study_furama_resort.src.service.impl.BookingServiceImpl.getInfo;
 
 public class WriteFileUtils {
 
@@ -95,6 +97,27 @@ public class WriteFileUtils {
                 bufferedWriter.newLine();
             }
 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            if (bufferedWriter != null) {
+                bufferedWriter.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeFileBooking(String filePath, Set<Booking> bookingSet) {
+        BufferedWriter bufferedWriter = null;
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            for (Booking booking : bookingSet) {
+                bufferedWriter.write(getInfo(booking));
+                bufferedWriter.newLine();
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

@@ -2,7 +2,7 @@ package case_study_furama_resort.src.service.impl;
 
 import case_study_furama_resort.src.model.person.Customer;
 import case_study_furama_resort.src.service.CustomerService;
-import case_study_furama_resort.src.utils.exception.CheckFormatException;
+import case_study_furama_resort.src.utils.exception.CheckFuramaException;
 import case_study_furama_resort.src.utils.read_write_file.ReadFileUtils;
 import case_study_furama_resort.src.utils.read_write_file.WriteFileUtils;
 
@@ -16,9 +16,9 @@ import java.util.Scanner;
 
 public class CustomerServiceImpl implements CustomerService {
     private static final String CUSTOMER_CSV = "src\\case_study_furama_resort\\src\\data\\customer.csv";
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static List<Customer> customerList = new LinkedList<>();
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @Override
     public void displayListCustomers() {
@@ -56,8 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         String address = getAddress();
 
-        Customer customer = new Customer(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email, typeGuest, address);
-        return customer;
+        return new Customer(id, name, dayOfBirth, gender, numberIdentityCard, numberPhone, email, typeGuest, address);
     }
 
     private String getAddress() {
@@ -67,9 +66,9 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println();
                 System.out.print("Enter address customer : ");
                 address = scanner.nextLine();
-                CheckFormatException.checkAddress(address);
+                CheckFuramaException.checkAddress(address);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -122,9 +121,9 @@ public class CustomerServiceImpl implements CustomerService {
             try {
                 System.out.print("Enter email : ");
                 email = scanner.nextLine();
-                CheckFormatException.checkEmail(email);
+                CheckFuramaException.checkEmail(email);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -138,9 +137,9 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println("Enter munber phone follow format +xx-xxxxxxxxxx  x: 2-6;0;9 number");
                 System.out.print("Enter number phone : ");
                 numberPhone = scanner.nextLine();
-                CheckFormatException.checkNumberPhone(numberPhone);
+                CheckFuramaException.checkNumberPhone(numberPhone);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -154,21 +153,10 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println("Enter id follow format FUC-000");
                 System.out.print("Id customer : ");
                 id = scanner.nextLine();
-                CheckFormatException.checkId(id);
-                boolean flagId = false;
-                for (Customer customer : customerList) {
-                    if (customer.getId().equals(id)) {
-                        flagId = true;
-                        break;
-                    }
-                }
-                if (flagId) {
-                    System.out.println("Id duplicates, re-enter");
-                } else {
-                    break;
-                }
-            } catch (CheckFormatException e) {
-                e.printStackTrace();
+                CheckFuramaException.checkId(id);
+                if (CheckFuramaException.checkDuplicatesId(id, customerList)) break;
+            } catch (CheckFuramaException e) {
+                System.out.println(e.getMessage());
             }
         }
         return id;
@@ -180,9 +168,9 @@ public class CustomerServiceImpl implements CustomerService {
             try {
                 System.out.print("Enter name customer : ");
                 name = scanner.nextLine();
-                CheckFormatException.checkName(name);
+                CheckFuramaException.checkName(name);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -200,8 +188,7 @@ public class CustomerServiceImpl implements CustomerService {
                 Period checkAge = Period.between(dayOfBirth, now);
                 if (checkAge.getYears() < 18 || checkAge.getYears() > 100) {
                     System.out.println("You are not enough age or too old to register service");
-                }
-                else {
+                } else {
                     break;
                 }
             } catch (DateTimeException e) {
@@ -251,7 +238,7 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println("Enter number identity card follow format xxxxxxxxxxxx  x: 9-12 number");
                 System.out.print("Enter number identity card : ");
                 numberIdentityCard = scanner.nextLine();
-                CheckFormatException.checkNumberIdentityCard(numberIdentityCard);
+                CheckFuramaException.checkNumberIdentityCard(numberIdentityCard);
                 boolean flagCheck = false;
                 for (Customer customer : customerList) {
                     if (customer.getNumberIdentityCard().equals(numberIdentityCard)) {
@@ -264,7 +251,7 @@ public class CustomerServiceImpl implements CustomerService {
                 } else {
                     break;
                 }
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -286,8 +273,8 @@ public class CustomerServiceImpl implements CustomerService {
         String typeGuestEdit;
         String addressEdit;
         int choice = 0;
-        for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).getId().equals(id)) {
+        for (Customer customer : customerList) {
+            if (customer.getId().equals(id)) {
                 LOOP:
                 while (true) {
                     System.out.println("Menu Edit");
@@ -309,35 +296,35 @@ public class CustomerServiceImpl implements CustomerService {
                     switch (choice) {
                         case 1:
                             nameEdit = getNameCustomer();
-                            customerList.get(i).setName(nameEdit);
+                            customer.setName(nameEdit);
                             break;
                         case 2:
                             dayOfBirthEdit = getDateCustomer();
-                            customerList.get(i).setDayOfBirth(dayOfBirthEdit);
+                            customer.setDayOfBirth(dayOfBirthEdit);
                             break;
                         case 3:
                             genderEdit = getGenderCustomer();
-                            customerList.get(i).setGender(genderEdit);
+                            customer.setGender(genderEdit);
                             break;
                         case 4:
                             numberIdentityCardEdit = getNumberIdentityCardCustomer();
-                            customerList.get(i).setNumberIdentityCard(numberIdentityCardEdit);
+                            customer.setNumberIdentityCard(numberIdentityCardEdit);
                             break;
                         case 5:
                             numberPhoneEdit = getNumberPhoneCustomer();
-                            customerList.get(i).setNumberPhone(numberPhoneEdit);
+                            customer.setNumberPhone(numberPhoneEdit);
                             break;
                         case 6:
                             emailEdit = getEmailCustomer();
-                            customerList.get(i).setEmail(emailEdit);
+                            customer.setEmail(emailEdit);
                             break;
                         case 7:
                             typeGuestEdit = getTypeGuest();
-                            customerList.get(i).setTypeGuest(typeGuestEdit);
+                            customer.setTypeGuest(typeGuestEdit);
                             break;
                         case 8:
                             addressEdit = getAddress();
-                            customerList.get(i).setAddress(addressEdit);
+                            customer.setAddress(addressEdit);
                             break;
                         case 9:
                             break LOOP;

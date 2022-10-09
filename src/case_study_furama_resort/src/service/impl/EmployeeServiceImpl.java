@@ -2,13 +2,12 @@ package case_study_furama_resort.src.service.impl;
 
 import case_study_furama_resort.src.model.person.Employee;
 import case_study_furama_resort.src.service.EmployeeService;
-import case_study_furama_resort.src.utils.exception.CheckFormatException;
+import case_study_furama_resort.src.utils.exception.CheckFuramaException;
 import case_study_furama_resort.src.utils.read_write_file.ReadFileUtils;
 import case_study_furama_resort.src.utils.read_write_file.WriteFileUtils;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,25 +68,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 System.out.println("Enter id follow format FUE-xxx x : 3 number");
                 System.out.print("Id employee : ");
                 id = scanner.nextLine();
-                CheckFormatException.checkId(id);
-                boolean flagId = false;
-                for (Employee employee : employeeList) {
-                    if (employee.getId().equals(id)) {
-                        flagId = true;
-                        break;
-                    }
-                }
-                if (flagId) {
-                    System.out.println("Id duplicates, re-enter");
-                } else {
-                    break;
-                }
-            } catch (CheckFormatException e) {
-                e.printStackTrace();
+                CheckFuramaException.checkId(id);
+                if (CheckFuramaException.checkDuplicatesId(id, employeeList)) break;
+            } catch (CheckFuramaException e) {
+                System.out.println(e.getMessage());
             }
         }
         return id;
     }
+
 
     private double getSalaryEmployee() {
         double salary;
@@ -109,9 +98,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             try {
                 System.out.print("Enter email : ");
                 email = scanner.nextLine();
-                CheckFormatException.checkEmail(email);
+                CheckFuramaException.checkEmail(email);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -122,12 +111,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         String numberPhone;
         while (true) {
             try {
-                System.out.println("Enter munber phone follow format +xx-xxxxxxxxxx  x: 2-6;0;9 number");
+                System.out.println("Enter number phone follow format +xx-xxxxxxxxxx  x: 2-6;0;9 number");
                 System.out.print("Enter number phone : ");
                 numberPhone = scanner.nextLine();
-                CheckFormatException.checkNumberPhone(numberPhone);
+                CheckFuramaException.checkNumberPhone(numberPhone);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -141,7 +130,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 System.out.println("Enter number identity card follow format xxxxxxxxxxxx  x: 9-12 number");
                 System.out.print("Enter number identity card : ");
                 numberIdentityCard = scanner.nextLine();
-                CheckFormatException.checkNumberIdentityCard(numberIdentityCard);
+                CheckFuramaException.checkNumberIdentityCard(numberIdentityCard);
                 boolean flagCheck = false;
                 for (Employee employee : employeeList) {
                     if (employee.getNumberIdentityCard().equals(numberIdentityCard)) {
@@ -154,7 +143,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 } else {
                     break;
                 }
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -163,19 +152,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private LocalDate getDateEmployee() {
         LocalDate dayOfBirth;
-        LocalDate now;
+        LocalDate nowSub18;
         while (true) {
             try {
                 System.out.print("Enter day of birth employee : ");
                 dayOfBirth = LocalDate.parse(scanner.nextLine(), formatter);
-                now = LocalDate.now();
-                Period checkAge = Period.between(dayOfBirth, now);
-                if (checkAge.getYears() < 18 || checkAge.getYears() > 70) {
+                nowSub18 = LocalDate.now().minusYears(18);
+                if (dayOfBirth.compareTo(nowSub18) > 0) {
                     System.out.println("Not enough age or too old to work, re-enter");
                 } else {
                     break;
                 }
-
             } catch (DateTimeException e) {
                 System.out.println("Enter incorrect format of day, re-enter");
             }
@@ -189,9 +176,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             try {
                 System.out.print("Enter name employee : ");
                 name = scanner.nextLine();
-                CheckFormatException.checkName(name);
+                CheckFuramaException.checkName(name);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -405,7 +392,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public static String getInfo(Employee employee) {
-        return employee.getId() + ";" + employee.getName() + ";" + employee.getDayOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ";" + employee.getGender() + ";"
-                + employee.getNumberIdentityCard() + ";" + employee.getNumberPhone() + ";" + employee.getEmail() + ";" + employee.getLevel() + ";" + employee.getPosition() + ";" + employee.getSalary();
+        return employee.getId() + "," + employee.getName() + "," + employee.getDayOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + employee.getGender() + ","
+                + employee.getNumberIdentityCard() + "," + employee.getNumberPhone() + "," + employee.getEmail() + "," + employee.getLevel() + "," + employee.getPosition() + "," + employee.getSalary();
     }
+
 }

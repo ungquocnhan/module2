@@ -4,7 +4,9 @@ import case_study_furama_resort.src.model.Booking;
 import case_study_furama_resort.src.model.facility.Facility;
 import case_study_furama_resort.src.model.person.Customer;
 import case_study_furama_resort.src.service.BookingService;
-import case_study_furama_resort.src.utils.exception.CheckFormatException;
+import case_study_furama_resort.src.service.CustomerService;
+import case_study_furama_resort.src.service.FacilityService;
+import case_study_furama_resort.src.utils.exception.CheckFuramaException;
 import case_study_furama_resort.src.utils.read_write_file.ReadFileUtils;
 import case_study_furama_resort.src.utils.read_write_file.WriteFileUtils;
 import case_study_furama_resort.src.utils.sort.ComparatorDate;
@@ -17,17 +19,18 @@ import java.util.*;
 public class BookingServiceImpl implements BookingService {
     private static final String CUSTOMER_CSV = "src\\case_study_furama_resort\\src\\data\\customer.csv";
     private static final String FACILITY_CSV = "src\\case_study_furama_resort\\src\\data\\facility.csv";
-
+    private static final String BOOKING_CSV = "src\\case_study_furama_resort\\src\\data\\booking.csv";
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Set<Booking> bookingSet = new TreeSet<>(new ComparatorDate());
+    private static Set<Booking> bookingSet = new TreeSet<>(new ComparatorDate());
     private static List<Customer> customerList = new ArrayList<>();
     private static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
+    private static CustomerService customerService = new CustomerServiceImpl();
+    private static FacilityService facilityService = new FacilityServiceImpl();
 
     @Override
     public void addNewBooking() {
+        bookingSet = ReadFileUtils.getAllBookingFromFile(BOOKING_CSV);
         customerList = ReadFileUtils.getAllCustomerFromFile(CUSTOMER_CSV);
         facilityIntegerMap = ReadFileUtils.getAllFacilityFromFile(FACILITY_CSV);
         for (Customer customer : customerList) {
@@ -39,6 +42,7 @@ public class BookingServiceImpl implements BookingService {
         }
         Booking booking = this.infoBooking();
         bookingSet.add(booking);
+        WriteFileUtils.writeFileBooking(BOOKING_CSV, bookingSet);
         WriteFileUtils.writeFileFacility(FACILITY_CSV, facilityIntegerMap);
         System.out.println("Enter success");
     }
@@ -48,7 +52,7 @@ public class BookingServiceImpl implements BookingService {
 
         LocalDate dateStart = getDateStart();
 
-        LocalDate dateEnd = getDateEnd();
+        LocalDate dateEnd = getDateEnd(dateStart);
 
         String idCustomer = getIdCustomer();
 
@@ -63,11 +67,12 @@ public class BookingServiceImpl implements BookingService {
         String typeService;
         while (true) {
             try {
+                System.out.println("Enter type service follow format Xxxxx... X:A-Z  x:a-z");
                 System.out.print("Enter type service : ");
                 typeService = scanner.nextLine();
-                CheckFormatException.checkNameService(typeService);
+                CheckFuramaException.checkNameService(typeService);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -79,9 +84,10 @@ public class BookingServiceImpl implements BookingService {
         String idService;
         while (true) {
             try {
+                System.out.println("Enter id follow format SVXX-yyyy XX:villa-VL;house-HO;room-RO yyyy: 0-9");
                 System.out.print("Enter id service : ");
                 idService = scanner.nextLine();
-                CheckFormatException.checkIdService(idService);
+                CheckFuramaException.checkIdService(idService);
                 boolean flag = false;
                 Set<Facility> facilitySet = facilityIntegerMap.keySet();
                 for (Facility key : facilitySet) {
@@ -92,11 +98,19 @@ public class BookingServiceImpl implements BookingService {
                     }
                 }
                 if (!flag) {
-                    System.out.println("Re-enter id service");
-                } else {
-                    break;
+                    System.out.println("Enter new service");
+                    for (Facility key : facilitySet) {
+                        if (key.getIdService().contains("VL")) {
+                            facilityService.addNewVilla();
+                        } else if (key.getIdService().contains("HO")) {
+                            facilityService.addNewHouse();
+                        } else if (key.getIdService().contains("RO")) {
+                            facilityService.addNewRoom();
+                        }
+                    }
                 }
-            } catch (CheckFormatException e) {
+                break;
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -108,9 +122,10 @@ public class BookingServiceImpl implements BookingService {
         String idCustomer;
         while (true) {
             try {
+                System.out.println("Enter id follow format FUC-xxx x : 3 number");
                 System.out.print("Enter id customer : ");
                 idCustomer = scanner.nextLine();
-                CheckFormatException.checkId(idCustomer);
+                CheckFuramaException.checkId(idCustomer);
                 boolean flag = false;
                 for (Customer customer : customerList) {
                     if (customer.getId().equals(idCustomer)) {
@@ -119,25 +134,26 @@ public class BookingServiceImpl implements BookingService {
                     }
                 }
                 if (!flag) {
-                    System.out.println("Re-enter id customer");
-                } else {
-                    break;
+                    System.out.println("Enter new customer");
+                    customerService.addNewCustomer();
                 }
-            } catch (CheckFormatException e) {
+                break;
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
         return idCustomer;
     }
 
-    private LocalDate getDateEnd() {
+    private LocalDate getDateEnd(LocalDate dateStart) {
         LocalDate dateEnd;
         while (true) {
             try {
                 System.out.print("Enter date end : ");
                 dateEnd = LocalDate.parse(scanner.nextLine(), formatter);
+                CheckFuramaException.checkDateEnd(dateStart, dateEnd);
                 break;
-            } catch (DateTimeException e) {
+            } catch (DateTimeException | CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -150,8 +166,9 @@ public class BookingServiceImpl implements BookingService {
             try {
                 System.out.print("Enter date start : ");
                 dateStart = LocalDate.parse(scanner.nextLine(), formatter);
+                CheckFuramaException.checkDateStart(dateStart);
                 break;
-            } catch (DateTimeException e) {
+            } catch (DateTimeException | CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -165,7 +182,7 @@ public class BookingServiceImpl implements BookingService {
                 System.out.println("Enter id follow format FUB-xxx x : 3 number");
                 System.out.print("Id booking : ");
                 idBooking = scanner.nextLine();
-                CheckFormatException.checkId(idBooking);
+                CheckFuramaException.checkId(idBooking);
                 boolean flagId = false;
                 for (Booking booking : bookingSet) {
                     if (booking.getIdService().equals(idBooking)) {
@@ -178,7 +195,7 @@ public class BookingServiceImpl implements BookingService {
                 } else {
                     break;
                 }
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 e.printStackTrace();
             }
         }
@@ -188,10 +205,14 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void displayListBooking() {
+        bookingSet = ReadFileUtils.getAllBookingFromFile(BOOKING_CSV);
         for (Booking booking : bookingSet) {
             System.out.println(booking);
         }
 
     }
 
+    public static String getInfo(Booking booking) {
+        return booking.getIdBooking() + "," + booking.getDateStart().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + booking.getDateEnd().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + booking.getIdCustomer() + "," + booking.getIdService() + "," + booking.getTypeService();
+    }
 }

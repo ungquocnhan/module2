@@ -1,19 +1,18 @@
 package case_study_furama_resort.src.utils.read_write_file;
 
+import case_study_furama_resort.src.model.Booking;
 import case_study_furama_resort.src.model.facility.Facility;
 import case_study_furama_resort.src.model.facility.House;
 import case_study_furama_resort.src.model.facility.Room;
 import case_study_furama_resort.src.model.facility.Villa;
 import case_study_furama_resort.src.model.person.Customer;
 import case_study_furama_resort.src.model.person.Employee;
+import case_study_furama_resort.src.utils.sort.ComparatorDate;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReadFileUtils {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -56,7 +55,7 @@ public class ReadFileUtils {
             String[] info;
             Employee employee;
             for (String s : stringList) {
-                info = s.split(";");
+                info = s.split(",");
                 employee = new Employee();
                 employee.setId(info[0]);
                 employee.setName(info[1]);
@@ -208,5 +207,28 @@ public class ReadFileUtils {
             System.out.println(exception.getMessage());
         }
         return facilityIntegerMap;
+    }
+
+    public static Set<Booking> getAllBookingFromFile(String filePath) {
+        List<String> stringList = readFile(filePath);
+        Set<Booking> bookingSet = new TreeSet<>(new ComparatorDate());
+        try {
+            String[] info;
+            Booking booking;
+            for (String s : stringList) {
+                info = s.split(",");
+                booking = new Booking();
+                booking.setIdBooking(info[0]);
+                booking.setDateStart(LocalDate.parse(info[1], formatter));
+                booking.setDateEnd(LocalDate.parse(info[2], formatter));
+                booking.setIdCustomer(info[3]);
+                booking.setIdService(info[4]);
+                booking.setTypeService(info[5]);
+                bookingSet.add(booking);
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return bookingSet;
     }
 }

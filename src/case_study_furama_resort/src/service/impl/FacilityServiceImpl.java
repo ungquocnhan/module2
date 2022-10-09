@@ -5,7 +5,7 @@ import case_study_furama_resort.src.model.facility.House;
 import case_study_furama_resort.src.model.facility.Room;
 import case_study_furama_resort.src.model.facility.Villa;
 import case_study_furama_resort.src.service.FacilityService;
-import case_study_furama_resort.src.utils.exception.CheckFormatException;
+import case_study_furama_resort.src.utils.exception.CheckFuramaException;
 import case_study_furama_resort.src.utils.read_write_file.ReadFileUtils;
 import case_study_furama_resort.src.utils.read_write_file.WriteFileUtils;
 
@@ -23,7 +23,6 @@ public class FacilityServiceImpl implements FacilityService {
         Set<Facility> facilitySet = facilityIntegerMap.keySet();
         for (Facility key : facilitySet) {
             System.out.print(key + " " + facilityIntegerMap.get(key) + "\n");
-
         }
 
     }
@@ -143,11 +142,12 @@ public class FacilityServiceImpl implements FacilityService {
         String nameService;
         while (true) {
             try {
+                System.out.println("Enter name service follow format Xxxxx... X:A-Z  x:a-z");
                 System.out.print("Enter name service : ");
                 nameService = scanner.nextLine();
-                CheckFormatException.checkNameService(nameService);
+                CheckFuramaException.checkNameService(nameService);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -249,11 +249,12 @@ public class FacilityServiceImpl implements FacilityService {
         String idService;
         while (true) {
             try {
+                System.out.println("Enter id follow format SVXX-yyyy XX:villa-VL;house-HO;room-RO yyyy: 0-9");
                 System.out.print("Enter id service : ");
                 idService = scanner.nextLine();
-                CheckFormatException.checkIdService(idService);
+                CheckFuramaException.checkIdService(idService);
                 break;
-            } catch (CheckFormatException e) {
+            } catch (CheckFuramaException e) {
                 System.out.println(e.getMessage());
             }
         }
